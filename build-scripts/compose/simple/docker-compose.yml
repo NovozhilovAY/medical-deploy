@@ -1,8 +1,23 @@
 version: '2.4'
 
 services:
+  rabbitmq:
+    hostname: 'rabbit'
+    image: rabbitmq:3.10-management
+    healthcheck:
+      test: rabbitmq-diagnostics -q ping
+      interval: 30s
+      timeout: 30s
+      retries: 3
+    ports:
+      - '5672:5672'
+      - '15672:15672'
+
   message-analyzer:
     image: application/message-analyzer:simple
+    depends_on:
+      rabbitmq:
+        condition: service_healthy
     healthcheck:
       test: ["CMD", "curl", "-f", "http://localhost:8080/actuator/health"]
       interval: 20s
