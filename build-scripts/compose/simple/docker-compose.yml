@@ -59,3 +59,13 @@ services:
       SERVER_PORT: 8080
     ports:
       - 8091:8080
+
+  message-consumer:
+    image: application/message-consumer:simple
+    depends_on:
+      message-analyzer:
+        condition: service_healthy
+      medical-monitoring:
+        condition: service_healthy
+    ports:
+      - 8094:8080

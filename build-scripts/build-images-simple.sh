@@ -58,9 +58,10 @@ pull_or_clone_proj common-module https://github.com/NovozhilovAY/common-module.g
 pull_or_clone_proj medical-monitoring https://github.com/NovozhilovAY/liga-medical-clinic.git
 pull_or_clone_proj message-analyzer https://github.com/NovozhilovAY/message-analyzer.git
 pull_or_clone_proj person-service https://github.com/NovozhilovAY/person-service.git
+pull_or_clone_proj message-consumer https://github.com/NovozhilovAY/message-consumer.git
 
 build_lib common-module
-build_jar medical-monitoring message-analyzer person-service
+build_jar medical-monitoring message-analyzer person-service message-consumer
 
 
 APP_VERSION=0.0.1-SNAPSHOT
@@ -69,3 +70,4 @@ echo "Building Docker images"
 build_basic_images ./medical-monitoring/core/target/medical-monitoring-${APP_VERSION}.jar application/medical-monitoring
 build_basic_images ./message-analyzer/core/target/message-analyzer-${APP_VERSION}.jar application/message-analyzer
 build_basic_images ./person-service/core/target/person-service-${APP_VERSION}.jar application/person-service
+build_basic_images ./message-consumer/target/message-consumer-${APP_VERSION}.jar application/message-consumer
